@@ -7,6 +7,7 @@ import {
     loginHandler,
     updateUser,
     logout,
+    getMe,
 } from  "../controllers/UserController.js";
 import { verifyToken } from "../midleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
@@ -24,6 +25,7 @@ router.get('/users', verifyToken, getUsers);
 router.get('/users/:id', verifyToken, getUserById);
 router.delete('/delete-user/:id', verifyToken, deleteUser);
 router.put('/update-user/:id', verifyToken, updateUser);
+router.get('/me', verifyToken, getMe); // Get current user info
 
 export default router;
 

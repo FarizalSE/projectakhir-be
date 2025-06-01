@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/token', refreshToken);
 
-router.get('/transaction', verifyToken, getTransaction);
+router.get('/transactions/:userId', verifyToken, getTransaction);
 router.post('/add-transaction', verifyToken, addTransaction);
 router.put("/update-transaction/:id", verifyToken, updateTransaction);
 

@@ -143,7 +143,7 @@ async function loginHandler(req, res) {
 
                 res.cookie('refreshToken', refresh_token, {
                     httpOnly : false,
-                    sameSite : 'none',
+                    sameSite : 'lax',
                     maxAge : 24*60*60*1000,
                     secure : false,
                 });
@@ -194,10 +194,36 @@ async function logout(req, res) {
             }
         });
         res.clearCookie('refreshToken'); // Menghapus cookie yang tersimpan
-        return res.sendstatus(200);
+        return res.sendStatus(200);
     } catch (error) {
         console.log(error);
     }
 }
 
-export {getUsers,getUserById,loginHandler,deleteUser,logout,updateUser,createUser}
+async function getMe(req,res) {
+    try {
+    const user = await User.findOne({
+      where: {
+        email: req.email, // dari req.email di middleware
+      },
+      attributes: ["id", "name", "email"], // sesuaikan kolom yang ingin dikirim
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: "Error",
+        message: "User tidak ditemukan",
+      });
+    }
+
+    return res.json(user);
+    } catch (error) {
+    return res.status(500).json({
+      status: "Error",
+      message: "Terjadi kesalahan server",
+    });
+  }
+}
+
+
+export {getUsers,getUserById,loginHandler,deleteUser,logout,updateUser,createUser, getMe}

@@ -50,6 +50,9 @@ async function deleteWeapons(req, res) {
 
 async function updateWeapons(req, res) {
     try {
+        console.log("BODY:", req.body); // ⬅️ Log isi body
+        console.log("PARAMS:", req.params); 
+
         const {name, type, serialNum, condition, location, stok} = req.body;
         let updateData = {
             name, type, serialNum, condition, location, stok

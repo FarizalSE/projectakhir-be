@@ -16,7 +16,7 @@ router.get('/token', refreshToken);
 router.get('/weapons', verifyToken, getWeapons);
 router.get('/weapons/:id', verifyToken, getWeaponById);
 router.post('/add-weapons', addWeapons);
-router.put('/update-weapons', verifyToken, updateWeapons);
+router.put('/update-weapons/:id', verifyToken, updateWeapons);
 router.delete('/delete-weapons/:id', verifyToken, deleteWeapons);
 
 export default router;
