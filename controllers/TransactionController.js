@@ -6,6 +6,30 @@ import Weapons from "../models/WeaponModel.js";
 //GET : mengambil semua data transaksi
 async function getTransaction(req, res) {
     try {
+        const userId = req.params.userId;
+        const response = await Transactions.findAll({
+            where : {
+                userId : userId,
+            },
+            include: [
+                {
+                    model: Users,
+                    attributes: ['id', 'name', 'email']
+                },
+                {
+                    model: Weapons,
+                    attributes: ['id', 'name', 'type', 'serialNum', 'condition', 'location', 'stok']
+                }
+            ]
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+async function getAllTransaction(req, res) {
+    try {
         const response = await Transactions.findAll({
             include: [
                 {
@@ -85,4 +109,4 @@ async function updateTransaction(req, res) {
     }
 }
 
-export {getTransaction, addTransaction, updateTransaction, getTransactionById};
+export {getTransaction, addTransaction, updateTransaction, getTransactionById, getAllTransaction};
