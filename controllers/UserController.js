@@ -143,7 +143,7 @@ async function loginHandler(req, res) {
 
                 res.cookie('refreshToken', refresh_token, {
                     httpOnly : true,
-                    sameSite : 'lax',
+                    sameSite : 'none',
                     maxAge : 24*60*60*1000,
                     secure : true,
                 });
