@@ -1,3 +1,6 @@
+substitutions:
+  _ENV: gs://project_akhir_198-199/.env
+
 steps:
   # Ngambil data env yg disimpen di cloud storage pake gsuri
   - name: "gcr.io/cloud-builders/gsutil"
